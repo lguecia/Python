@@ -1,0 +1,154 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+    <h1 class="mb-3">Form</h1>
+
+    <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+    <form action="/form" method="post">
+
+        <!-- TODO -->
+        <div class="form-group row">
+            <label for="First" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+                <input autocomplete="off" autofocus name="First" type="text" class="form-control" id="First" placeholder="David">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Last" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+                <input name="Last" type="text" class="form-control" id="Last" placeholder="Malan">
+            </div>
+        </div>
+
+        <fieldset class="radio-form-group">
+            <div class="row">
+                <label class="col-form-label col-sm-2 pt-0">Gender</label>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input name="Gender" class="form-check-input" type="radio" id="Gender1" value="male">
+                        <label class="form-check-label" for="Gender1">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Gender" class="form-check-input" type="radio" id="Gender2" value="female">
+                        <label class="form-check-label" for="Gender2">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Gender" class="form-check-input" type="radio" id="Gender3" value="other">
+                        <label class="form-check-label" for="Gender3">Other</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="radio-form-group">
+            <div class="row">
+                <label class="col-form-label col-sm-2 pt-0">Favorite Meal</label>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="radio" id="Meal1" value="breakfast">
+                        <label class="form-check-label" for="Meal1">Breakfast</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="radio" id="Meal2" value="lunch">
+                        <label class="form-check-label" for="Meal2">Lunch</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="radio" id="Meal3" value="dinner">
+                        <label class="form-check-label" for="Meal3">Dinner</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="radio" id="Meal4" value="dessert">
+                        <label class="form-check-label" for="Meal4">Dessert</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!--checkbox attempt, did not yield multiple results-->
+        <!--<fieldset id="Meal" class="check-form-group">
+            <div class="row">
+                <label class="col-form-label col-sm-2 pt-0">Favorite Meal</label>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="checkbox" id="Meal1" value="breakfast">
+                        <label class="form-check-label" for="Meal1">Breakfast</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="checkbox" id="Meal2" value="lunch or dinner">
+                        <label class="form-check-label" for="Meal2">Lunch/Dinner</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input name="Meal" class="form-check-input" type="checkbox" id="Meal3" value="dessert">
+                        <label class="form-check-label" for="Meal3">Dessert</label>
+                    </div>
+                </div>
+            </div>
+            <script>
+            $(".checkbox:checked").map(function() {
+                return this.value;
+            }).get().join(", ");
+            </script>
+        </fieldset>-->
+
+        <div class="form-group">
+            <label for="Age">Age (16)</label>
+            <input name="Age" type="range" class="form-control-range" id="Age" min="16" max="50" step="1" value="16">
+        </div>
+        <script>
+        $('#Age').on('change input', function() {
+            var $this = $(this);
+            $this.siblings('label').html('Age (' + $this.val() + ')');
+        });
+        </script>
+
+        <div class="form-row align-items-center">
+            <label class="col-sm-2 col-form-label" for="inlineFormCustomSelect">Coding Level</label>
+            <div class="col-auto my-1">
+                <select name="Level" class="custom-select mr-sm-10" id="inlineFormCustomSelect">
+                    <option disabled selected value="">Choose</option>
+                    <option value="clueless">Clueless: What is coding</option>
+                    <option value="not so good">Not So Good: Can't code to save my life</option>
+                    <option value="good">Good: I think I'm ready for an internship</option>
+                    <option value="great">Great: Not to toot my own horn, but toot, toot</option>
+                    <option value="expert">Expert: I do this stuff in my sleep, watch out Zuck</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+        <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+
+    <script>
+
+        /* TODO */
+        document.querySelector('form').onsubmit = function() {
+            if (!document.querySelector('input').value) {
+                alert('You must provide your name');
+                return false;
+            }
+            else if (!document.querySelector('radio').value) {
+                alert('You must provide your gender');
+                return false;
+            }
+            else if (!document.querySelector('checkbox').value) {
+                alert('You must provide your favorite meal');
+                return false;
+            }
+            else if (!document.querySelector('range').value) {
+                alert('You must provide your age');
+                return false;
+            }
+            else if (!document.querySelector('select').value) {
+                alert('You must provide your coding level');
+                return false;
+            }
+            return true;
+        };
+
+    </script>
+
+{% endblock %}
